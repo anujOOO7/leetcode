@@ -4,22 +4,16 @@ public:
     int maximumGroups(vector<int> &grades)
     {
         sort(grades.begin(), grades.end());
-
-        int pSum = 0, cSum = 0;
-        int pCnt = 0, cCnt = 0, res = 0;
-
-        for (int grade : grades)
+        int n = grades.size();
+        int count = 0;
+        if (n == 2)
+            return 1;
+        int i = 0;
+        while (i < n)
         {
-            cSum += grade;
-            cCnt++;
-            if (cCnt > pCnt && cSum > pSum)
-            {
-                res++;
-                pSum = cSum;
-                pCnt = cCnt;
-                cSum = cCnt = 0;
-            }
+            count += 1;
+            i += count + 1;
         }
-        return res;
+        return count;
     }
 };
