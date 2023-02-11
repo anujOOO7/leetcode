@@ -1,19 +1,21 @@
 class Solution
 {
 public:
+    typedef long long ll;
+    bool check(ll mid,ll n){
+        return (mid*(mid+1)/2)<=n;
+    }
+                
     int maximumGroups(vector<int> &grades)
     {
-        sort(grades.begin(), grades.end());
-        int n = grades.size();
-        int count = 0;
-        if (n == 2)
-            return 1;
-        int i = 0;
-        while (i < n)
-        {
-            count += 1;
-            i += count + 1;
+        int n = grades.size(),l(0),r(1e6),mid;
+        while(r-l>1){
+            mid=(l+r)/2;
+            if(check(mid,n))
+                l=mid;
+            else
+                r=mid;
         }
-        return count;
+        return l;
     }
 };
