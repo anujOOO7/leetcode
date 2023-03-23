@@ -18,7 +18,7 @@ class Solution {
         {
             if(c%2==0)
             {
-                if(mp[s[i]]!=1)
+                if(mp[s[i]]>1)
                 {
                     mp[s[i]]--;
                     c++;
