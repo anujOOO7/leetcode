@@ -1,11 +1,12 @@
 class Solution {
 public:
     int findDuplicate(vector<int>& nums) {
-        map<int,int> m;
+        bool marked[100001];
+        memset(marked,false,sizeof(marked));
         for(int i=0;i<nums.size();i++){
-            m[nums[i]]++;
-            if(m[nums[i]]==2)
+            if(marked[nums[i]])
                 return nums[i];
+            marked[nums[i]]=true;
         }
         return 0;
     }
