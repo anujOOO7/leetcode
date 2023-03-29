@@ -10,9 +10,6 @@ using namespace std;
 
 
 void sol(vector<vector<int> > &m,int i,int j,int n,vector<vector<int>> visited,string s,vector<string>& ans){
-  if(i>=n or j>=n){
-      return;
-  }
   if(i==n-1 && j==n-1){
     ans.push_back(s);
     return;
