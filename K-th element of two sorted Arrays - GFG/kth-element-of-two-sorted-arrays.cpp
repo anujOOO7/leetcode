@@ -6,17 +6,35 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
     public:
-    int kthElement(int arr1[], int arr2[], int n, int m, int k)
+    int kthElement(int arr1[], int arr2[], int n, int m, int ind)
     {
-        priority_queue<int,vector<int>,greater<int>> pq;
-        for(int i=0;i<n;i++) pq.push(arr1[i]);
-        for(int i=0;i<m;i++) pq.push(arr2[i]);
-        int count=1;
-        while(!pq.empty() and count<k){
-            pq.pop();
-            count++;
-        }
-        return pq.top();
+          int i=0,j=0,k=0;  
+          vector<int> ans(n+m);
+          while(i <n && j<m){
+              if(arr1[i] < arr2[j]){
+                  ans[k] = arr1[i];
+                  i++;
+              }
+              else{
+                  ans[k] = arr2[j];
+                  j++;
+              }
+              k++;
+          }
+          
+          while(i<n)
+          {
+              ans[k]=arr1[i];
+              i++;
+              k++;
+          }
+          while(j< m)
+          {
+              ans[k] = arr2[j];
+              j++;
+              k++;
+          }
+        return ans[ind-1];
     }
 };
 
