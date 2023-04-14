@@ -7,7 +7,6 @@ public:
         for(auto c:t){
             if(m[c]) m[c]--;
             else count++;
-            if(m[c]==0) m.erase(c);
         }
         for(auto [x,y]:m) count+=y;
         return count;
