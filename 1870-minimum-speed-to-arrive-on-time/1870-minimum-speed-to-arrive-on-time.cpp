@@ -16,7 +16,6 @@ public:
             if(f(dist,mid,d-1,hour)) r=mid;
             else l=mid;
         }
-        cout<<r<<" "<<l<<endl;
         if(r==INT_MAX) return -1;
         return r;
     }
