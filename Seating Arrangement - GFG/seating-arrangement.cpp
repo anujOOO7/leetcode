@@ -12,11 +12,11 @@ class Solution{
     public:
     bool is_possible_to_get_seats(int n, int m, vector<int>& seats){
         // Write your code here.
-         if(m==1){
-            if(seats[0]==1 && n==0) return true;
-            else if(seats[0]==0 && n==1) return true;
-            else if(seats[0]==0 && n>1) return false;
-        }
+    if(m==1){
+        if(seats[0]==1 && n==0) return true;
+        else if(seats[0]==0 && n==1) return true;
+        else if(seats[0]==0 && n>1) return false;
+    }
 
     for(int i=0;i<m;i++){
         if(n==0) return true;
