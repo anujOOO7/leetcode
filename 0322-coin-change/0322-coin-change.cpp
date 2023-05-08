@@ -13,7 +13,7 @@ public:
         return dp[i][a]=min(1+f(i,c,a-c[i]),f(i+1,c,a));
     }
     int coinChange(vector<int>& c,int a){
-        sort(rbegin(c),rend(c));
+        //sort(rbegin(c),rend(c));
         memset(dp,-1,sizeof(dp));
         int ans=f(0,c,a);
         if(ans>=1e5) return -1;
