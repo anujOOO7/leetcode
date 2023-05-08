@@ -3,7 +3,7 @@ public:
     int dp[13][10001];
     int f(int i,vector<int>& c,int a){
         if(a==0) return 0;
-        if(a!=0 && i==c.size()) return 1e5;
+        if( i==c.size()) return 1e5;
         if(dp[i][a]!=-1)
             return dp[i][a];
         
