@@ -1,18 +1,13 @@
 class Solution {
 public:
-    int charge;
-    vector<int> p;
-    int dp[50001][2];
-    int f(int i,int j){
-        if(i>=p.size()) return 0;
-        
-        if(dp[i][j]!=-1) return dp[i][j];
-        if(!j) return dp[i][j]=max(-p[i]+f(i+1,1),f(i+1,0));
-        else return dp[i][j]=max(-charge+p[i]+f(i+1,0),f(i+1,1));
-    }
     int maxProfit(vector<int>& prices, int fee) {
-        p=prices,charge=fee;
-        memset(dp,-1,sizeof(dp));
-        return f(0,0);
+        int n=prices.size();
+        vector<vector<int>> dp(n+1,vector<int> (2,0));
+        
+        for(int i=n-1;i>=0;i--){
+            dp[i][0]=max(-prices[i]+dp[i+1][1],dp[i+1][0]);
+            dp[i][1]=max(-fee+prices[i]+dp[i+1][0],dp[i+1][1]);
+        }
+        return dp[0][0];
     }
 };
