@@ -7,8 +7,7 @@ public:
         
         if(dp[i][j]!=-1) return dp[i][j];
         if(!j) return dp[i][j]=max(-p[i]+f(i+1,1),f(i+1,0));
-        else return dp[i][j]=max(p[i]+f(i+2,0),f(i+1,1));
-        
+        return dp[i][j]=max(p[i]+f(i+2,0),f(i+1,1));
     }
     int maxProfit(vector<int>& prices) {
         p=prices;
