@@ -1,17 +1,15 @@
 class Solution {
 public:
-    vector<int> p;
-    int dp[5001][2];
-    int f(int i,int j){
-        if(i>=p.size()) return 0;
-        
-        if(dp[i][j]!=-1) return dp[i][j];
-        if(!j) return dp[i][j]=max(-p[i]+f(i+1,1),f(i+1,0));
-        return dp[i][j]=max(p[i]+f(i+2,0),f(i+1,1));
-    }
     int maxProfit(vector<int>& prices) {
-        p=prices;
-        memset(dp,-1,sizeof(dp));
-        return f(0,0);
+        int n=prices.size();
+        vector<vector<int>> dp(n+2,vector<int> (2,0));
+        
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<=1;j++){
+                if(!j) dp[i][j]=max(-prices[i]+dp[i+1][1],dp[i+1][0]);
+                else dp[i][j]=max(prices[i]+dp[i+2][0],dp[i+1][1]);
+            }
+        }
+        return dp[0][0];
     }
 };
