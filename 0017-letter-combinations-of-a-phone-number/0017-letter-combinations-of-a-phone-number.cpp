@@ -4,7 +4,7 @@ public:
     vector<string> f(int i,string &digits,string s){
         if(i==digits.length()){
             if(s.size()>0) ans.push_back(s);
-            // return ans;
+            return ans;
         }
         
         if(digits[i]=='2'){
