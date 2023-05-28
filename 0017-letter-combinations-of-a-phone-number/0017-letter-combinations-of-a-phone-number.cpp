@@ -1,69 +1,57 @@
 class Solution {
 public:
     vector<string> ans;
-    void f(int i,string d,string str)
-    {
-        if(i==d.size())
-        {  
-            if(str.size()>0)
-                ans.push_back(str);
-            return ;
+    vector<string> f(int i,string &digits,string s){
+        if(i==digits.length()){
+            if(s.size()>0) ans.push_back(s);
+            // return ans;
         }
-        if(d[i]=='2')
-        {
-            f(i+1,d,str+'a');
-            f(i+1,d,str+'b');
-            f(i+1,d,str+'c');
+        
+        if(digits[i]=='2'){
+            f(i+1,digits,s+'a');
+            f(i+1,digits,s+'b');
+            f(i+1,digits,s+'c');
         }
-        else if(d[i]=='3')
-        {
-            f(i+1,d,str+'d');
-            f(i+1,d,str+'e');
-            f(i+1,d,str+'f');
+        if(digits[i]=='3'){
+            f(i+1,digits,s+'d');
+            f(i+1,digits,s+'e');
+            f(i+1,digits,s+'f');
         }
-        else if(d[i]=='4')
-        {
-            f(i+1,d,str+'g');
-            f(i+1,d,str+'h');
-            f(i+1,d,str+'i');
+        if(digits[i]=='4'){
+            f(i+1,digits,s+'g');
+            f(i+1,digits,s+'h');
+            f(i+1,digits,s+'i');
         }
-        else if(d[i]=='5')
-        {
-            f(i+1,d,str+'j');
-            f(i+1,d,str+'k');
-            f(i+1,d,str+'l');
+        if(digits[i]=='5'){
+            f(i+1,digits,s+'j');
+            f(i+1,digits,s+'k');
+            f(i+1,digits,s+'l');
         }
-        else if(d[i]=='6')
-        {
-            f(i+1,d,str+'m');
-            f(i+1,d,str+'n');
-            f(i+1,d,str+'o');
+        if(digits[i]=='6'){
+            f(i+1,digits,s+'m');
+            f(i+1,digits,s+'n');
+            f(i+1,digits,s+'o');
         }
-        else if(d[i]=='7')
-        {
-            f(i+1,d,str+'p');
-            f(i+1,d,str+'q');
-            f(i+1,d,str+'r');
-            f(i+1,d,str+'s');
+        if(digits[i]=='7'){
+            f(i+1,digits,s+'p');
+            f(i+1,digits,s+'q');
+            f(i+1,digits,s+'r');
+            f(i+1,digits,s+'s');
         }
-        else if(d[i]=='8')
-        {
-            f(i+1,d,str+'t');
-            f(i+1,d,str+'u');
-            f(i+1,d,str+'v');
+        if(digits[i]=='8'){
+            f(i+1,digits,s+'t');
+            f(i+1,digits,s+'u');
+            f(i+1,digits,s+'v');
         }
-        else
-        {
-            f(i+1,d,str+'w');
-            f(i+1,d,str+'x');
-            f(i+1,d,str+'y');
-            f(i+1,d,str+'z');
+        if(digits[i]=='9'){
+            f(i+1,digits,s+'w');
+            f(i+1,digits,s+'x');
+            f(i+1,digits,s+'y');
+            f(i+1,digits,s+'z');
         }
-    }
-    vector<string> letterCombinations(string digits) 
-    {
-        string str;
-        f(0,digits,str);
         return ans;
+    }
+    vector<string> letterCombinations(string digits) {
+        return f(0,digits,"");
     }
 };
