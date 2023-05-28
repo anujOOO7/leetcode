@@ -1,16 +1,17 @@
 class Solution {
 public:
+    int n;
     int dp[201][201];
-    int f(int i,int j,vector<vector<int>>& t)
-    {
-        if(i==t.size()) return 0;
+    vector<vector<int>> t;
+    int f(int i,int j){
+        if(i==n) return 0;
+        
         if(dp[i][j]!=-1) return dp[i][j];
-        return dp[i][j]=t[i][j]+min(f(i+1,j,t),f(i+1,j+1,t));
+        return dp[i][j]=t[i][j]+min(f(i+1,j),f(i+1,j+1));
     }
-    int minimumTotal(vector<vector<int>>& triangle) 
-    {
+    int minimumTotal(vector<vector<int>>& triangle) {
         memset(dp,-1,sizeof(dp));
-        int ans=f(0,0,triangle);
-        return ans;
+        t=triangle,n=t.size();
+        return f(0,0);
     }
 };
