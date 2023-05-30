@@ -1,21 +1,20 @@
 class MyHashSet {
 public:
-    map<int,int> m;
+    set<int> s;
     MyHashSet() {
         
     }
     
     void add(int key) {
-        m[key]++;
+        s.insert(key);
     }
     
     void remove(int key) {
-        if(m[key]!=0) m.erase(key);
+        if(s.count(key)) s.erase(key);
     }
     
     bool contains(int key) {
-        if(m[key]!=0) return true;
-        return false;
+        return s.count(key);
     }
 };
 
