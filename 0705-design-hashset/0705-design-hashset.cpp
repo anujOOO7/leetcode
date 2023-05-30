@@ -10,11 +10,11 @@ public:
     }
     
     void remove(int key) {
-        if(m.find(key)!=m.end()) m.erase(key);
+        if(m[key]!=0) m.erase(key);
     }
     
     bool contains(int key) {
-        if(m.find(key)!=m.end()) return true;
+        if(m[key]!=0) return true;
         return false;
     }
 };
