@@ -1,16 +1,21 @@
 class Solution {
 public:
-    int lengthOfLIS(vector<int>& nums) {
-        int n=nums.size();
-        vector<int> temp;
-        temp.push_back(nums[0]);
-        for(int i=1;i<n;i++){
-            if(nums[i]>temp.back()) temp.push_back(nums[i]);
-            else{
-                int ind=lower_bound(temp.begin(),temp.end(),nums[i])-temp.begin();
-                temp[ind]=nums[i];
-            }
+    vector<int> nums;
+    int dp[2501][2501];
+    int f(int i,int prev_ind){
+        if(i==nums.size()) return 0;
+        
+        int &d=dp[i][prev_ind+1];
+        if(d!=-1) return d;
+        int len=f(i+1,prev_ind);
+        if(prev_ind==-1 || nums[i]>nums[prev_ind]){
+            len=max(len,1+f(i+1,i));
         }
-        return temp.size();
+        return d=len;
+    }
+    int lengthOfLIS(vector<int>& arr) {
+        memset(dp,-1,sizeof(dp));
+        nums=arr;
+        return f(0,-1);
     }
 };
