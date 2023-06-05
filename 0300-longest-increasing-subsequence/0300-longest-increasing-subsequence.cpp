@@ -13,9 +13,18 @@ public:
         }
         return d=len;
     }
-    int lengthOfLIS(vector<int>& arr) {
-        memset(dp,-1,sizeof(dp));
-        nums=arr;
-        return f(0,-1);
+    int lengthOfLIS(vector<int>& nums) {
+        int n=nums.size();
+        int dp[n+1][n+1];
+        memset(dp,0,sizeof(dp));
+        
+        for(int i=n-1;i>=0;i--){
+            for(int j=i-1;j>=-1;j--){
+                int count=dp[i+1][j+1];
+                if(j==-1 || nums[i]>nums[j]) count=max(count,1+dp[i+1][i+1]);
+                dp[i][j+1]=count;
+            }
+        }
+        return dp[0][0];
     }
 };
