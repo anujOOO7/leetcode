@@ -8,9 +8,8 @@ public:
                 count++;
             }
             if(count>k){                
-                    if(nums[i]==0)
-                    count--;
-                    i++;                
+                if(nums[i]==0) count--;
+                i++;                
             }
             j++;
         }
