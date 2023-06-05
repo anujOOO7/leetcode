@@ -1,21 +1,15 @@
 class Solution {
 public:
     using ll=long long;
-    vector<int> nums;
-    vector<vector<ll>> dp;
-    ll f(int i,int j){
-        if(i==nums.size()) return 0;
-        
-        ll &d=dp[i][j];
-        if(d!=-1) return d;
-        ll ans=INT_MIN;
-        if(!j) ans=max(nums[i]+f(i+1,1),f(i+1,0));
-        else ans=max(-nums[i]+f(i+1,0),f(i+1,1));
-        return d=ans;
-    }
-    long long maxAlternatingSum(vector<int>& arr) {
-        nums=arr;
-        dp.resize(arr.size()+1,vector<ll> (2,-1));
-        return f(0,0);
+    long long maxAlternatingSum(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<ll>> dp(n+1,vector<ll> (2,0));
+        for(int i=n-1;i>=0;i--){
+            for(int j=0;j<=1;j++){
+                if(!j) dp[i][j]=max(nums[i]+dp[i+1][1],dp[i+1][0]);
+                else dp[i][j]=max(-nums[i]+dp[i+1][0],dp[i+1][1]);
+            }
+        }
+        return dp[0][0];
     }
 };
