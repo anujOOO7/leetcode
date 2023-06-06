@@ -7,8 +7,13 @@ public:
         if(i==size(nums)-1) return true;
         
         if(dp[i][k]!=-1) return dp[i][k];
-        int ind=find(nums.begin(),nums.end(),nums[i]+k)-nums.begin();
-        return dp[i][k]=f(ind,k-1) | f(ind,k) | f(ind,k+1);
+        bool ans=false;
+        for(int j=i+1;j<nums.size();j++){
+            if(nums[j]-nums[i]==k){
+                ans|=f(j,k-1) | f(j,k) | f(j,k+1);
+            }
+        }
+        return dp[i][k]=ans;
     }
     bool canCross(vector<int>& stones) {
         nums=stones;
