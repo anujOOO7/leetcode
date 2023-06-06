@@ -10,7 +10,7 @@ public:
         bool ans=false;
         for(int j=i+1;j<nums.size();j++){
             if(nums[j]-nums[i]==k){
-                ans|=f(j,k-1) | f(j,k) | f(j,k+1);
+                ans=f(j,k-1) | f(j,k) | f(j,k+1);
             }
         }
         return dp[i][k]=ans;
