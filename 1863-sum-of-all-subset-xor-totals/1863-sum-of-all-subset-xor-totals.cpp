@@ -8,8 +8,5 @@ public:
     }
     int subsetXORSum(vector<int>& nums) {
         return f(0,0,nums);
-        int ans=0;
-        for(auto val:nums) ans+=val;
-        return ans;
     }
 };
