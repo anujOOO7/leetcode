@@ -5,7 +5,7 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    bool dfs(int i,vector<int>& vis,vector<int> adj[]){
+    bool bfs(int i,vector<int>& vis,vector<int> adj[]){
         vis[i]=1;
         queue<pair<int,int>> q;
         q.push({i,-1});
@@ -31,7 +31,7 @@ class Solution {
         vector<int> vis(V,0);
         for(int i=0;i<V;i++){
             if(!vis[i]){
-                if(dfs(i,vis,adj)) return true;
+                if(bfs(i,vis,adj)) return true;
             }
         }
         return false;
