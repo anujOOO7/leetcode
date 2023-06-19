@@ -15,9 +15,7 @@ public:
                 for(int dj=-1;dj<=1;dj++){
                     if(abs(di)+abs(dj)!=2){
                         int ni=i+di,nj=j+dj;
-                        if(ni>=0 && nj>=0 && ni<n && nj<m && grid[ni][nj]=='1' && !vis[ni][nj]){
-                            bfs(ni,nj,vis,grid);
-                        }
+                        if(ni>=0 && nj>=0 && ni<n && nj<m && grid[ni][nj]=='1' && !vis[ni][nj]) bfs(ni,nj,vis,grid);
                     }
                 }
             }
