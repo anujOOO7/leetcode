@@ -8,8 +8,9 @@ public:
         if(i>=m || j>=n) return 0;
         if(g[i][j]==1) return 0;
         
-        if(dp[i][j]!=-1) return dp[i][j];
-        return dp[i][j]=f(i+1,j,g)+f(i,j+1,g);
+        int &d=dp[i][j];
+        if(d!=-1) return d;
+        return d=f(i+1,j,g)+f(i,j+1,g);
     }
     int uniquePathsWithObstacles(vector<vector<int>>& g) {
         memset(dp,-1,sizeof(dp));
