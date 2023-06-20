@@ -4,13 +4,12 @@ public:
     vector<vector<int>> vis;
     vector<int> dx{-1,0,0,1};
     vector<int> dy{0,-1,1,0};
-    void dfs(int i,int j,vector<vector<char>>& board){       
-        vis[i][j]=1;
-        for(int p=0;p<4;p++){
-            int ni=i+dx[p],nj=j+dy[p];
-            if(ni>=0 && ni<m && nj>=0 && nj<n && board[ni][nj]=='O' && !vis[ni][nj]){
-                vis[ni][nj]=1;
-                dfs(ni,nj,board);
+    void f(int i,int j,vector<vector<char>>& board){
+        if(i>=0 && i<m && j>=0 && j<n && board[i][j]=='O' && !vis[i][j]){        
+            vis[i][j]=1;
+            for(int p=0;p<4;p++){
+                int ni=i+dx[p],nj=j+dy[p];
+                f(ni,nj,board);
             }
         }
     }
@@ -20,8 +19,7 @@ public:
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if((i==0 || i==m-1 || j==0 || j==n-1) && board[i][j]=='O' && !vis[i][j]){
-                    vis[i][j]=1;
-                    dfs(i,j,board);
+                    f(i,j,board);
                 }
             }
         }
