@@ -15,23 +15,18 @@ class Solution {
                 //continue
             }
             else if(bills[i]==10){
-                if(m[5]!=0){
+                if(m[5]>=1){
                     m[5]--;
-                    if(m[5]==0) m.erase(5);
                 }
                 else return false;
             }
             else{
                 if(m[5]>=3 || (m[10]>=1 && m[5]>=1)){
                     if(m[10]>=1 && m[5]>=1){
-                        m[5]-=1;
-                        m[10]-=1;
-                        if(m[5]==0) m.erase(5);
-                        if(m[10]==0) m.erase(10);
+                        m[5]-=1; m[10]-=1;
                     }
                     else if(m[5]>=3){
                         m[5]-=3;
-                        if(m[5]==0) m.erase(5);
                     }
                 }
                 else return false;
