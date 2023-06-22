@@ -6,28 +6,26 @@ public:
             adj[it[0]].push_back(it[1]);
         }
         
-        vector<int> indegree(n);
-	    for(auto i = 0; i < n; i++) {
-	        for(auto j: adj[i])
-	            indegree[j]++;
+        vector<int> indegree(n,0),ans;
+	    for(int i=0;i<n;i++){
+	        for(auto it:adj[i]){
+	            indegree[it]++;
+	        }
 	    }
 	    
 	    queue<int> q;
-	    for(int i = 0; i < n; i++) {
-	        if(!indegree[i])
-	            q.push(i);
+	    for(int i=0;i<n;i++){
+	        if(indegree[i]==0) q.push(i);
 	    }
 	    
-	    vector<int> ans;
-	    while(!q.empty()) {
-	        auto p = q.front();
+	    while(!q.empty()){
+	        int x=q.front();
+	        ans.push_back(x);
 	        q.pop();
 	        
-	        ans.push_back(p);
-	        for(auto v: adj[p]) {
-	            indegree[v]--;
-	            if(!indegree[v])
-	                q.push(v);
+	        for(auto it:adj[x]){
+	            indegree[it]--;
+	            if(indegree[it]==0) q.push(it);
 	        }
 	    }
         reverse(begin(ans),end(ans));
