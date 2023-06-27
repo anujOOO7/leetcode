@@ -11,17 +11,21 @@ class Solution
     vector <int> dijkstra(int V, vector<vector<int>> adj[], int S)
     {
         vector<int> dist(V,INT_MAX);
-        priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>> pq;
-        pq.push({0,S});
+        set<vector<int>> st;
+        st.insert({0,S});
         
-        while(!pq.empty()){
-            int d=pq.top()[0];
-            int x=pq.top()[1];
+        while(!st.empty()){
+            auto itr=*(st.begin());
+            int d=itr[0];
+            int x=itr[1];
             dist[x]=min(dist[x],d);
-            pq.pop();
+            st.erase(itr);
             
             for(auto it:adj[x]){
-                if(d+it[1]<=dist[it[0]]) pq.push({d+it[1],it[0]});
+                if(d+it[1]<=dist[it[0]]){
+                    if(dist[it[0]]!=INT_MAX) st.erase({dist[it[0]],it[0]});
+                    st.insert({d+it[1],it[0]});
+                }
             }
         }
         return dist;
