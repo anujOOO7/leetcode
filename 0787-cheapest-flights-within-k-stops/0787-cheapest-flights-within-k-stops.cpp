@@ -17,6 +17,8 @@ public:
             int pr=q.front()[2];
             q.pop();
             
+            if(stops==k+1 && node==dst) break;
+            if(stops>k+1) continue;
             for(auto it:adj[node]){
                 int nn=it.first;
                 int np=it.second;
