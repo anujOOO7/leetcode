@@ -43,9 +43,11 @@ public:
         }
         
         DisjointSet ds(m+n+1);
+        //map to store only those rows and columns in which stones are present
         map<int,int> stoneNodes;
         for(auto it:stones){
             int r=it[0];
+            //shifting of columns by m+1 to get everything in 1D array
             int c=it[1]+m+1;
             ds.unionBySize(r,c);
             stoneNodes[r]=1;
