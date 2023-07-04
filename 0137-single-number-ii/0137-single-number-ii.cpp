@@ -1,14 +1,14 @@
 class Solution {
 public:
     int singleNumber(vector<int>& nums) {
-        map<int,int> m;
-        for(auto val:nums){
-            m[val]++;
+        int res=0;
+        for(int i=0;i<32;i++){
+            long long cnt=0;
+            for(int j=0;j<nums.size();j++){
+                cnt+=((nums[j]>>i)&1);
+            }
+            res|=((cnt%3)<<i);
         }
-        for(auto it:m){
-            if(it.second!=3)
-                return it.first;
-        }
-        return 0;
+        return res;
     }
 };
