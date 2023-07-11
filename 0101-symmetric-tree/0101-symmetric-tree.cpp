@@ -11,16 +11,12 @@
  */
 class Solution {
 public:
-    bool isEqual(TreeNode*r1,TreeNode*r2){        
-        if(!r1 || !r2)
-            return r1==r2;
-        if(r1->val==r2->val){
-            return isEqual(r1->left,r2->right) && isEqual(r1->right,r2->left);
-        }
-        return false;
+    bool f(TreeNode* left,TreeNode* right){
+        if(!left || !right) return left==right;
+        if(left->val!=right->val) return false;
+        return f(left->left,right->right)&&f(left->right,right->left);
     }
-    
     bool isSymmetric(TreeNode* root) {
-        return isEqual(root->left,root->right);
+        return root==NULL || f(root->left,root->right);
     }
 };
