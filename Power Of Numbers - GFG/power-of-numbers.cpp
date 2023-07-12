@@ -7,19 +7,34 @@ using namespace std;
 class Solution{
     public:
     //You need to complete this fucntion
-#define mod 1000000007
-    long long power(int N,int R)
+    using ll=long long;
+    ll modExpo(ll x, ll n, ll m)
     {
-       //Your code here
-        if(R==0)
-            return 1;
-        long long ans=power(N,R/2);
-        if(R&1)
-            return (N%mod*ans%mod*ans%mod)%mod;
-        else
-            return (ans%mod*ans%mod)%mod;
+        ll res = 1;
+        while (n > 0)
+        {
+            if (n & 1)
+            {
+                res = res * x % m;
+                n--;
+            }
+            else
+            {
+                x = x * x % m;
+                n /= 2;
+            }
+        }
+        return res;
     }
-
+    ll power(int N,int R)
+    {
+       ll k=N,num=0;
+       while(k){
+           num=(num*10)+(k%10);
+           k/=10;
+       }
+       return modExpo(N,num,1e9+7);
+    }
 };
 
 //{ Driver Code Starts.
