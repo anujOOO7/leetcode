@@ -11,22 +11,30 @@
  */
 class Solution {
 public:
-    int sum=0;
-    void f(TreeNode* root){
-        if(root==NULL) return;
-        int x=0;
-        if(root->left) x+=root->left->val;
-        if(root->right) x+=root->right->val;
-        sum+=x;
-    }
     int sumEvenGrandparent(TreeNode* root) {
-        if(root==NULL)return 0;
-        if(root->val%2==0){
-            f(root->left);
-            f(root->right);
+        if(!root) return 0;
+        vector<TreeNode*> parent(10001,NULL);
+        queue<TreeNode*> q;
+        q.push(root);
+        int sum=0;
+        
+        while(!q.empty()){
+            int sz=size(q);
+            
+            for(int i=0;i<sz;i++){
+                auto node=q.front();
+                q.pop();
+                
+                if(node->val%2==0){
+                    if(node->left && node->left->left) sum+=node->left->left->val;
+                    if(node->left && node->left->right) sum+=node->left->right->val;
+                    if(node->right && node->right->left) sum+=node->right->left->val;
+                    if(node->right && node->right->right) sum+=node->right->right->val;
+                }
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+            }
         }
-        sumEvenGrandparent(root->left);
-        sumEvenGrandparent(root->right);
         return sum;
     }
 };
