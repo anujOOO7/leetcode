@@ -12,19 +12,20 @@
 class Solution {
 public:
     int mx=0;
-    void f(TreeNode* root,TreeNode* node){
-        if(!root || !node) return;
-        int diff=abs(root->val-node->val);
-        mx=max(mx,diff);
-        f(root,node->left);
-        f(root,node->right);
+    vector<int> temp;
+    void f(TreeNode* root){
+        if(!root){
+            mx=max(mx,abs(*max_element(begin(temp),end(temp))-*min_element(begin(temp),end(temp))));
+            return;
+        }
+            
+        temp.push_back(root->val);
+        f(root->left);
+        f(root->right);
+        temp.pop_back();
     }
     int maxAncestorDiff(TreeNode* root) {
-        if(!root) return 0;
-        f(root,root->left);
-        f(root,root->right);
-        maxAncestorDiff(root->left);
-        maxAncestorDiff(root->right);
+        f(root);
         return mx;
     }
 };
