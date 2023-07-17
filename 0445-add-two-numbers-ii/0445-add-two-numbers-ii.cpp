@@ -23,35 +23,41 @@ public:
             st2.push(node2->val);
             node2=node2->next;
         }
-        vector<int> ans;
+        
         int carry=0;
+        ListNode* dummy=new ListNode();
+        ListNode* temp=dummy;
         while(!st1.empty() && !st2.empty()){
             int sum=st1.top()+st2.top()+carry;
             st1.pop(); st2.pop();
             carry=sum/10;
-            ans.push_back(sum%10);
+            temp->next=new ListNode(sum%10);
+            temp=temp->next;
         }
         while(!st1.empty()){
             int sum=st1.top()+carry;
             st1.pop();
             carry=sum/10;
-            ans.push_back(sum%10);
+            temp->next=new ListNode(sum%10);
+            temp=temp->next;
         }
         while(!st2.empty()){
             int sum=st2.top()+carry;
             st2.pop();
             carry=sum/10;
-            ans.push_back(sum%10);
-        }
-        if(carry) ans.push_back(carry);
-        
-        ListNode* dummy=new ListNode();
-        ListNode* temp=dummy;
-        for(int i=ans.size()-1;i>=0;i--){
-            ListNode* newNode=new ListNode(ans[i]);
-            temp->next=newNode;
+            temp->next=new ListNode(sum%10);
             temp=temp->next;
         }
-        return dummy->next;
+        if(carry) temp->next=new ListNode(carry);
+        
+        ListNode *node=NULL;
+        dummy=dummy->next;
+        while(dummy){
+            ListNode *next=dummy->next;
+            dummy->next=node;
+            node=dummy;
+            dummy=next;
+        }
+        return node;
     }
 };
