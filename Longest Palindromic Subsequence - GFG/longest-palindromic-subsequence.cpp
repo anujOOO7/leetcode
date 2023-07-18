@@ -10,20 +10,24 @@ using namespace std;
 
 class Solution{
   public:
-    string s;
-    int dp[1001][1001];
-    int f(int l,int r){
-        if(l>r) return 0;
-        if(l==r) return 1;
-        
-        if(dp[l][r]!=-1) return dp[l][r];
-        if(s[l]==s[r]) return dp[l][r]=2+f(l+1,r-1);
-        else return dp[l][r]=max(f(l+1,r),f(l,r-1));
-    }
-    int longestPalinSubseq(string A) {
-        s=A;
-        memset(dp,-1,sizeof(dp));
-        return f(0,A.length()-1);
+     int longestPalinSubseq(string A) {
+        string reverse_A(A);
+        reverse(reverse_A.begin(), reverse_A.end());
+        int l=A.length();
+        vector<int> prev(l+1, 0);
+        vector<int> curr(l+1, 0);
+        for(int i=0; i<l; i++) {
+            for(int j=0; j<l; j++) {
+                if(A[i]==reverse_A[j]) {
+                    curr[j+1]=prev[j]+1;
+                }
+                else {
+                    curr[j+1]=max(curr[j], prev[j+1]);
+                }
+            }
+            prev=curr;
+        }
+        return prev[l];
     }
 };
 
