@@ -7,26 +7,25 @@ class Solution
 {
 public:
     vector<int> ans;
-    void gen(vector<int> &arr,int N,int i,vector<int> &s){
-        if(i==N){
-            ans.push_back(accumulate(s.begin(),s.end(),0));
-            return ;
+    void f(int ind,int sum,vector<int>& arr,vector<int>& freq){
+        if(ind>=arr.size()) return;
+        
+        for(int i=ind;i<arr.size();i++){
+            if(freq[i]==0){
+                sum+=arr[i];
+                ans.push_back(sum);
+                f(i+1,sum,arr,freq);
+                
+                freq[i]=0;
+                sum-=arr[i];
+            }
         }
-        
-        //not take
-        gen(arr,N,i+1,s);
-        
-        //take
-        s.push_back(arr[i]);
-        gen(arr,N,i+1,s);
-        s.pop_back();
     }
-    
     vector<int> subsetSums(vector<int> arr, int N)
     {
-        // Write Your Code here
-        vector<int> s;
-        gen(arr,N,0,s);
+        vector<int> freq(N,0);
+        ans.push_back(0);
+        f(0,0,arr,freq);
         return ans;
     }
 };
