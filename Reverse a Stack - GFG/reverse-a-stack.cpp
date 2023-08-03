@@ -10,31 +10,15 @@ using namespace std;
 
 class Solution{
 public:
-    void insertAtBottom(stack<int> &st,int ele){
-        if(st.empty()){
-            st.push(ele);
-            return ;
+    void Reverse(stack<int> &s){
+        vector<int> v;
+        while(!s.empty()){
+            v.push_back(s.top());
+            s.pop();
         }
-    
-        int num=st.top();
-        st.pop();
-    
-        //recursive call
-        insertAtBottom(st,ele);
-    
-        //post processing
-        st.push(num);
-    }
-    
-    void Reverse(stack<int> &St){
-        if(St.empty())
-            return ;
-            
-        int ele=St.top();
-        St.pop();
-        Reverse(St);
-        
-        insertAtBottom(St,ele);
+        for(int i=0;i<v.size();i++){
+            s.push(v[i]);
+        }
     }
 };
 
