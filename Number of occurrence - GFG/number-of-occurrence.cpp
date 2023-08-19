@@ -1,5 +1,4 @@
 //{ Driver Code Starts
-
 #include<bits/stdc++.h>
 
 using namespace std;
@@ -12,21 +11,11 @@ public:
 	/* if x is present in arr[] then returns the count
 		of occurrences of x, otherwise returns 0. */
 	int count(int arr[], int n, int x) {
-	    // code here
 	    int cnt=0;
-	    if(n==0)
-            return cnt;
-        
-        if(lower_bound(arr,arr+n,x)!=arr+n && arr[lower_bound(arr,arr+n,x)-arr]==x){
-            int k=lower_bound(arr,arr+n,x)-arr;
-            for(int i=k;i<n;i++){
-                if(arr[i]==x)
-                    cnt++;
-            }
-        }
-        else
-            return 0;
-        return cnt;
+	    for(int i=0;i<n;i++){
+	        if(arr[i]==x) cnt++;
+	    }
+	    return cnt;
 	}
 };
 
