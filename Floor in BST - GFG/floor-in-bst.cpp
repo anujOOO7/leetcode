@@ -15,7 +15,29 @@ struct Node {
     }
 };
 
-int floor(Node *root, int x);
+
+// } Driver Code Ends
+// Function to search a node in BST.
+class Solution{
+
+public:
+    int floor(Node* root, int x) {
+        int ans=INT_MIN;
+        while(root){
+            if(root->data==x) return x;
+            else if(root->data>x){
+                root=root->left;
+            }
+            else{
+                ans=max(ans,root->data);
+                root=root->right;
+            }
+        }
+        return ans==INT_MIN?-1:ans;
+    }
+};
+
+//{ Driver Code Starts.
 
 Node *insert(Node *tree, int val) {
     Node *temp = NULL;
@@ -46,24 +68,9 @@ int main() {
 
         int s;
         cin >> s;
-
-        cout << floor(root, s) << "\n";
+        Solution obj;
+        cout << obj.floor(root, s) << "\n";
     }
 }
 
 // } Driver Code Ends
-
-
-// Function to search a node in BST.
-
-int floor(Node* root, int x) {
-    int ans=-1;
-    while(root){
-        if(root->data<=x){
-            ans=root->data;
-            root=root->right;
-        }
-        else root=root->left;
-    }
-    return ans;
-}
