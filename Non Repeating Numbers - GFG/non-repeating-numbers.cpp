@@ -8,14 +8,22 @@ class Solution
 public:
     vector<int> singleNumber(vector<int> nums) 
     {
-        map<int,int> m;
-        for(auto i:nums) m[i]++;
-        vector<int> ans;
-        
-        for(auto it:m){
-            if(it.second==1) ans.push_back(it.first);
+        int ans=0;
+        for(int i=0;i<nums.size();i++){
+            ans^=nums[i];
         }
-        return ans;
+        ans&=(-ans);
+        int x=0,y=0;
+        for(auto it:nums){
+            if(it&ans) x^=it;
+            else y^=it;
+        }
+        
+        vector<int> a;
+        a.push_back(x);
+        a.push_back(y);
+        sort(a.begin(),a.end());
+        return a;
     }
 };
 
