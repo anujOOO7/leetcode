@@ -6,19 +6,35 @@ using namespace std;
 class Solution
 {
 	public:
-	vector<string>find_permutation(string S)
-	{
-	    // Code here there
-	    string t;
-        vector<string> v;
-	    t=S;
-	    sort(t.begin(),t.end());v.push_back(t);
-	    while(next_permutation(t.begin(),t.end()))
-	    {
-	        v.push_back(t);
+	    set<string> ans;
+	    void f(string s,string &temp,int cnt){
+	        if(cnt==s.length()){
+	            ans.insert(temp);
+	            return;
+	        }
+	        
+	        for(int j=0;j<s.length();j++){
+	            if(s[j]!='1'){
+	                temp.push_back(s[j]);
+	                char aa=s[j];
+	                s[j]='1';
+	                f(s,temp,cnt+1);
+	                s[j]=aa;
+	                temp.pop_back();
+	            }
+	        }
+	        return;
 	    }
-	    return v;
-	}
+		vector<string>find_permutation(string S)
+		{
+		    int cnt=0;
+		    string temp;
+		    f(S,temp,cnt);
+		    
+		    vector<string> res;
+		    for(auto i:ans) res.push_back(i);
+		    return res;
+		}
 };
 
 
@@ -33,6 +49,7 @@ int main(){
 	    cin >> S;
 	    Solution ob;
 	    vector<string> ans = ob.find_permutation(S);
+	    sort(ans.begin(),ans.end());
 	    for(auto i: ans)
 	    {
 	    	cout<<i<<" ";
