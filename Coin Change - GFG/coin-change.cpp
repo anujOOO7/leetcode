@@ -5,19 +5,25 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    long long n;
-    long long dp[1001][1001];
-    long long f(long long i,long long sum,long long target,int coins[]){
-        if(sum==target) return 1;
-        if(i>=n || sum>target) return 0;
+    using ll=long long;
+    ll dp[1001][1001];
+    ll f(int i,int n,int sum,int coins[]){
+        if(sum<0) return 0;
+        if(i==n){
+            if(sum==0){
+                return 1;
+            }
+            else return 0;
+        }
         
-        if(dp[i][sum]!=-1) return dp[i][sum];
-        return dp[i][sum]=f(i,sum+coins[i],target,coins)+f(i+1,sum,target,coins);
+        ll &d=dp[i][sum];
+        if(d!=-1) return d;
+        ll ans=f(i,n,sum-coins[i],coins)+f(i+1,n,sum,coins);
+        return d=ans;
     }
     long long int count(int coins[], int N, int sum) {
         memset(dp,-1,sizeof(dp));
-        n=N;
-        return f(0,0,sum,coins);
+        return f(0,N,sum,coins);
     }
 };
 
