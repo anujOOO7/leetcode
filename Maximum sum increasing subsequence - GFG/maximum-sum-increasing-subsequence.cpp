@@ -16,7 +16,7 @@ class Solution{
                 }
             }
         }
-        return *max_element(ans, ans + n);  
+        return *max_element(ans,ans+n);  
 	}
 };
 
