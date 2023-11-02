@@ -9,12 +9,12 @@ class Solution {
     bool dfs(int node,vector<int>& vis,int parent,vector<int> adj[]){
         vis[node]=1;
         
-        for(auto ele:adj[node]){
-            if(!vis[ele]){
-                if(dfs(ele,vis,node,adj)) return true;
+        for(auto nbr:adj[node]){
+            if(!vis[nbr]){
+                if(dfs(nbr,vis,node,adj)) return true;
             }
             else{
-                if(ele!=parent) return true;
+                if(nbr!=parent) return true;
             }
         }
         return false;
