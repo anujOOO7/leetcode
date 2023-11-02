@@ -5,39 +5,30 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
 public:
-    vector<int> color;
-    queue<pair<int,int>> q;
     
-    bool bfs(int node,vector<int> graph[]){
-        q.push({node,0});
+    bool dfs(int src,int cur,vector<int> &vis,vector<int> &color,vector<int> adj[]){
+        vis[src]=1;
+        color[src]=cur;
         
-        while(!q.empty()){
-            int x=q.front().first,c=q.front().second;
-            color[x]=c;
-            q.pop();
-            
-            for(auto i:graph[x]){
-                if(color[i]==-1){
-                    q.push({i,c^1});
-                }
-                else{
-                    if(color[x]==color[i]) return false;
-                }
+        for(auto nbr:adj[src]){
+            if(!vis[nbr]){
+                if(dfs(nbr,cur^1,vis,color,adj)) return true;
+            }
+            else{
+                if(cur==color[nbr]) return true;
             }
         }
-        return true;
+        return false;
     }
-	bool isBipartite(int n, vector<int>graph[]){
-	    // Code here
-	    color.resize(n,-1);
-        for(int i=0;i<n;i++){
-            if(color[i]==-1){
-                if(!bfs(i,graph)) return false;
-            }
-        }
-        return true;
+	bool isBipartite(int V, vector<int>adj[]){
+	    vector<int> vis(V,0),color(V,0);
+	    for(int i=0;i<V;i++){
+	        if(!vis[i]){
+	            if(dfs(i,0,vis,color,adj)) return false;
+	        }
+	    }
+	    return true;
 	}
-
 };
 
 //{ Driver Code Starts.
