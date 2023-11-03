@@ -9,26 +9,28 @@ class Solution
 	//Function to return list containing vertices in Topological order. 
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
+	    // code here
 	    vector<int> indegree(V,0),ans;
 	    for(int i=0;i<V;i++){
-	        for(auto it:adj[i]){
-	            indegree[it]++;
-	        }
+	        for(auto nbr:adj[i]) indegree[nbr]++;
 	    }
 	    
 	    queue<int> q;
 	    for(int i=0;i<V;i++){
-	        if(indegree[i]==0) q.push(i);
+	        if(indegree[i]==0){
+                ans.push_back(i);
+	            q.push(i);
+	        }
 	    }
 	    
 	    while(!q.empty()){
-	        int x=q.front();
-	        ans.push_back(x);
-	        q.pop();
-	        
-	        for(auto it:adj[x]){
-	            indegree[it]--;
-	            if(indegree[it]==0) q.push(it);
+	        auto cur=q.front(); q.pop();
+	        for(auto nbr:adj[cur]){
+	            indegree[nbr]--;
+	            if(indegree[nbr]==0){
+	                ans.push_back(nbr);
+	                q.push(nbr);
+	            }
 	        }
 	    }
 	    return ans;
