@@ -8,43 +8,36 @@ using namespace std;
 // User function Template for C++
 class Solution {
   public:
-     stack<int> st;
-     vector<int> vis;
-     void topo(int i,vector<pair<int,int>> adj[]){
-        vis[i]=1;
-        for(auto it:adj[i]){
-            if(!vis[it.first]) topo(it.first,adj);
-        }
-        st.push(i);
-     }
      vector<int> shortestPath(int N,int M, vector<vector<int>>& edges){
-        vector<pair<int,int>> adj[N];
-        vis.resize(N,0);
-        vector<int> dist(N,1e9);
-        
-        for(auto it:edges){
-            adj[it[0]].push_back({it[1],it[2]});
+        // code here
+        vector<vector<int>> adj[N];
+        for(auto i:edges){
+            adj[i[0]].push_back({i[1],i[2]});
         }
         
-        //topo sort for storing the indices in stack
-        for(int i=0;i<N;i++){
-            if(!vis[i]){
-                topo(i,adj);
-            }
-        }
-        
+        vector<int> dist(N,INT_MAX);
+        using pi=pair<int,int>;
+        priority_queue<pi,vector<pi>,greater<pi>> pq;
+        pq.push({0,0});
         dist[0]=0;
-        while(!st.empty()){
-            int x=st.top();
-            st.pop();
+        
+        while(!pq.empty()){
+            auto x=pq.top(); pq.pop();
+            int cur_node=x.second;
             
-            for(auto it:adj[x]){
-                int v=it.first,wt=it.second;
-                if(dist[v]>=dist[x]+wt) dist[v]=dist[x]+wt;
+            for(auto nbrPair:adj[cur_node]){
+                int nbr=nbrPair[0];
+                int cost=nbrPair[1];
+                
+                if(dist[nbr]>cost+dist[cur_node]){
+                    dist[nbr]=cost+dist[cur_node];
+                    pq.push({dist[nbr],nbr});
+                }
             }
         }
+        
         for(int i=0;i<N;i++){
-            if(dist[i]==1e9) dist[i]=-1;
+            if(dist[i]==INT_MAX) dist[i]=-1;
         }
         return dist;
     }
