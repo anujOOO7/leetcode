@@ -1,0 +1,54 @@
+// kmp
+
+int i=0,j=1,n=temp.length();
+vector<int> pre(n,0);
+while(j<n){
+    if(temp[i]==temp[j]){
+        pre[j]=i+1;
+        i++; j++;
+    }
+    else{
+        while(i>0 && temp[i]!=temp[j]) i=pre[i-1];
+        if(temp[i]!=temp[j]) j++;
+    }
+}
+
+
+
+
+// rolling hash
+
+using ll=long long;
+ll mod=1e9+7;
+ll powF(ll p,ll x){
+    if(x==0) return 1;
+    ll val=powF(p,x/2);
+    ll xy=(val*val)%mod;
+    if(x&1) return (xy*p)%mod;
+    return xy%mod;
+}
+
+ll revMod(ll x){
+    return powF(x,mod-2);
+}
+
+vector<ll> pre;
+void hash(string str){
+    ll p=31,val=0,pw=1;
+    for(auto i:str){
+        ll a=(i-'a'+1);
+        val+=(a*pw); val%=mod;
+        pw=p*pw; pw%=mod;
+        pre.push_back(val);
+    }
+}
+
+
+
+// dsu
+
+
+
+
+
+
